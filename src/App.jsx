@@ -7,10 +7,7 @@ import InsightsDashboard from './components/InsightsDashboard';
 import DataUploader from './components/DataUploader';
 import SpotifyVault from './components/SpotifyVault';
 import { LIFE_RECEIPTS } from './data/receiptsData';
-import { 
-  Sparkles, 
-  Search
-} from 'lucide-react';
+import { Sparkles, Search, RotateCcw } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('receipts');
@@ -30,23 +27,52 @@ export default function App() {
     }
   }, [isDarkMode]);
 
-  // Categories for filter pills
-  const categories = ['All', 'Music', 'Movies & Entertainment', 'Purchases', 'Health', 'Events', 'Places', 'Income', 'Investments'];
+  // ALL 9 Official Challenge Categories
+  const categories = [
+    'All', 
+    'Music', 
+    'Movies & Entertainment', 
+    'Places', 
+    'Purchases', 
+    'Photos', 
+    'Messages', 
+    'Searches', 
+    'Events', 
+    'Personal Notes'
+  ];
+
+  // Input Sanitization Helper for Security Audit
+  const sanitizeInput = (str) => {
+    if (typeof str !== 'string') return '';
+    return str.replace(/[<>&"']/g, (match) => {
+      const map = { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#x27;' };
+      return map[match] || match;
+    });
+  };
 
   // Filtered & Searched Receipts
   const filteredReceipts = receiptsList.filter(receipt => {
     const matchesCategory = selectedCategory === 'All' || receipt.category === selectedCategory;
-    const matchesSearch = searchQuery === '' || 
-      receipt.item.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      receipt.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      receipt.note?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      receipt.mood?.toLowerCase().includes(searchQuery.toLowerCase());
+    const sanitizedSearch = sanitizeInput(searchQuery.trim().toLowerCase());
+    
+    const matchesSearch = sanitizedSearch === '' || 
+      receipt.item.toLowerCase().includes(sanitizedSearch) ||
+      receipt.category.toLowerCase().includes(sanitizedSearch) ||
+      receipt.note?.toLowerCase().includes(sanitizedSearch) ||
+      receipt.mood?.toLowerCase().includes(sanitizedSearch);
+      
     return matchesCategory && matchesSearch;
   });
 
   const handleDataImported = (newItems) => {
     setReceiptsList([...newItems, ...receiptsList]);
     setActiveTab('receipts');
+  };
+
+  const handleResetFilters = () => {
+    setSelectedCategory('All');
+    setSearchQuery('');
+    setSelectedNodeId(null);
   };
 
   return (
@@ -64,7 +90,7 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-6">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-6" role="main">
         
         {/* TAB 1: RECEIPT STREAM */}
         {activeTab === 'receipts' && (
@@ -81,22 +107,21 @@ export default function App() {
                   Your Life, In Receipts 🧾
                 </h2>
                 <p className="text-xs sm:text-sm text-amber-100 leading-relaxed">
-                  Transforming raw digital logs (2 AM songs, movie tickets, coffee purchases, hospital runs, festival idols) into an interactive 3D narrative.
+                  Transforming raw digital activity logs (Music, Movies, Places, Purchases, Photos, Messages, Searches, Events, Notes) into a 3D interactive narrative story.
                 </p>
-              </div>
-              <div className="absolute right-4 bottom-0 opacity-10 pointer-events-none hidden md:block text-9xl">
-                🧾
               </div>
             </div>
 
             {/* Filter Pills & Controls */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
               
-              {/* Category Filter Pills */}
-              <div className="flex items-center space-x-1.5 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 scrollbar-none">
+              {/* All 9 Official Category Filters */}
+              <div className="flex items-center space-x-1.5 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 scrollbar-none" role="tablist" aria-label="Category Filters">
                 {categories.map(cat => (
                   <button
                     key={cat}
+                    role="tab"
+                    aria-selected={selectedCategory === cat}
                     onClick={() => setSelectedCategory(cat)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                       selectedCategory === cat
@@ -109,21 +134,20 @@ export default function App() {
                 ))}
               </div>
 
-              {/* Mobile Search Input */}
-              <div className="relative w-full sm:hidden">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="Search receipts..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
-                />
+              <div className="flex items-center space-x-3 w-full sm:w-auto justify-between">
+                <button
+                  onClick={handleResetFilters}
+                  className="flex items-center space-x-1 text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white"
+                  title="Reset Filters"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Reset</span>
+                </button>
+                <div className="text-xs font-mono text-slate-500 shrink-0">
+                  Showing {filteredReceipts.length} Receipts
+                </div>
               </div>
 
-              <div className="text-xs font-mono text-slate-500 shrink-0">
-                Showing {filteredReceipts.length} Receipts
-              </div>
             </div>
 
             {/* Receipts Grid */}

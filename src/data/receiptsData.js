@@ -1,71 +1,29 @@
-// Comprehensive Life Receipts Dataset
-// Merged from User Household CSV & Spotify Streaming History & Digital Life Logs
+/**
+ * @typedef {Object} LifeReceipt
+ * @property {string} id
+ * @property {string} timestamp
+ * @property {string} date
+ * @property {string} time
+ * @property {'Music' | 'Movies & Entertainment' | 'Places' | 'Purchases' | 'Photos' | 'Messages' | 'Searches' | 'Events' | 'Personal Notes'} category
+ * @property {string} subcategory
+ * @property {string} item
+ * @property {string} mode
+ * @property {number} amount
+ * @property {string} currency
+ * @property {'Expense' | 'Income' | 'Digital Moment'} type
+ * @property {string} location
+ * @property {string} mood
+ * @property {string} icon
+ * @property {string} note
+ * @property {string[]} tags
+ * @property {string[]} connectedIds
+ * @property {string} chronotype
+ * @property {string} insights
+ */
 
+/** @type {LifeReceipt[]} */
 export const LIFE_RECEIPTS = [
-  // MIDNIGHT & LATE NIGHT MELANCHOLY ERA (AUG - SEPT 2018)
-  {
-    id: "rec_101",
-    timestamp: "2018-08-31 23:42:00",
-    date: "31/08/2018",
-    time: "23:42",
-    category: "Movies & Entertainment",
-    subcategory: "Cinema",
-    item: "2 Movie Tickets - INOX Cinema",
-    mode: "Debit Card",
-    amount: 481.36,
-    currency: "INR",
-    type: "Expense",
-    location: "INOX Multiplex",
-    mood: "Nostalgic",
-    icon: "Film",
-    note: "Late night movie screening with a close friend after payday.",
-    tags: ["Late Night", "Cinema", "Social"],
-    connectedIds: ["rec_102", "rec_103", "rec_104"],
-    chronotype: "Night Owl",
-    insights: "Late Night Entertainment Spike after Monthly Salary Credit"
-  },
-  {
-    id: "rec_102",
-    timestamp: "2018-08-31 22:01:00",
-    date: "31/08/2018",
-    time: "22:01",
-    category: "Purchases",
-    subcategory: "Dinner",
-    item: "Domino's Gourmet Pizza & Garlic Bread",
-    mode: "Credit Card",
-    amount: 510.85,
-    currency: "INR",
-    type: "Expense",
-    location: "Domino's Pizza Outlet",
-    mood: "Craving",
-    icon: "Utensils",
-    note: "Celebratory post-work Friday night dinner.",
-    tags: ["Late Night Cravings", "Pizza", "Treat"],
-    connectedIds: ["rec_101", "rec_103"],
-    chronotype: "Night Owl",
-    insights: "Food craving linked directly with payday income"
-  },
-  {
-    id: "rec_103",
-    timestamp: "2018-08-31 09:27:00",
-    date: "31/08/2018",
-    time: "09:27",
-    category: "Income",
-    subcategory: "Salary",
-    item: "Monthly Salary Payout",
-    mode: "Bank Account 1",
-    amount: 70255.00,
-    currency: "INR",
-    type: "Income",
-    location: "Workplace",
-    mood: "Relieved & Excited",
-    icon: "Wallet",
-    note: "Monthly hard work compensation credited!",
-    tags: ["Salary", "Income", "Payday"],
-    connectedIds: ["rec_101", "rec_102", "rec_105"],
-    chronotype: "Early Bird",
-    insights: "Income anchor point triggering monthly savings & indulgence"
-  },
+  // 1. MUSIC
   {
     id: "rec_104",
     timestamp: "2018-09-01 02:15:00",
@@ -87,266 +45,54 @@ export const LIFE_RECEIPTS = [
     chronotype: "Night Owl",
     insights: "2 AM music stream highly correlated with late night movie runs"
   },
-  {
-    id: "rec_105",
-    timestamp: "2018-09-01 10:00:00",
-    date: "01/09/2018",
-    time: "10:00",
-    category: "Investments",
-    subcategory: "Public Provident Fund",
-    item: "PPF Wealth Investment",
-    mode: "Bank Account 1",
-    amount: 12500.00,
-    currency: "INR",
-    type: "Transfer-Out",
-    location: "National Portal",
-    mood: "Disciplined",
-    icon: "PiggyBank",
-    note: "First of the month automated financial discipline.",
-    tags: ["Savings", "Investment", "Future Security"],
-    connectedIds: ["rec_103"],
-    chronotype: "Early Bird",
-    insights: "Automated 17.7% salary allocation to long-term wealth building"
-  },
 
-  // HEALTH & CARE PHASE (JULY - AUGUST 2018)
+  // 2. MOVIES & ENTERTAINMENT
   {
-    id: "rec_201",
-    timestamp: "2018-07-20 09:11:00",
-    date: "20/07/2018",
-    time: "09:11",
-    category: "Health",
-    subcategory: "Medicine",
-    item: "Cataract Prescription Medicine",
-    mode: "Credit Card",
-    amount: 1048.00,
-    currency: "INR",
-    type: "Expense",
-    location: "Eye Institute Pharmacy",
-    mood: "Anxious & Caring",
-    icon: "HeartPulse",
-    note: "Eye drops and post-surgery care prescription for family elder.",
-    tags: ["Family Health", "Eye Care", "Medical"],
-    connectedIds: ["rec_202", "rec_203", "rec_204"],
-    chronotype: "Early Bird",
-    insights: "Increased healthcare outlay during mid-summer family care period"
-  },
-  {
-    id: "rec_202",
-    timestamp: "2018-07-20 13:06:00",
-    date: "20/07/2018",
-    time: "13:06",
-    category: "Places",
-    subcategory: "Taxi",
-    item: "Ola Cab Ride - Eye Institute to Residence",
-    mode: "Bank Account 1",
-    amount: 155.00,
-    currency: "INR",
-    type: "Expense",
-    location: "City Transit",
-    mood: "Exhausted",
-    icon: "Car",
-    note: "Rainy afternoon cab ride back home from clinic.",
-    tags: ["Commute", "Cab Ride", "Hospital"],
-    connectedIds: ["rec_201", "rec_203"],
-    chronotype: "Afternoon",
-    insights: "Transit convenience prioritized during health visits"
-  },
-  {
-    id: "rec_203",
-    timestamp: "2018-07-20 19:59:00",
-    date: "20/07/2018",
-    time: "19:59",
-    category: "Purchases",
-    subcategory: "Ice Cream",
-    item: "Chocobar Treats (Post-Clinic Comfort)",
-    mode: "Cash",
-    amount: 20.00,
-    currency: "INR",
-    type: "Expense",
-    location: "Corner Kirana Shop",
-    mood: "Sweet Comfort",
-    icon: "IceCream",
-    note: "A quick sweet treat after a tiring medical day.",
-    tags: ["Comfort Food", "Ice Cream", "Small Joys"],
-    connectedIds: ["rec_201", "rec_202"],
-    chronotype: "Evening",
-    insights: "Sweet indulgence as stress-relief after healthcare obligations"
-  },
-  {
-    id: "rec_204",
-    timestamp: "2018-08-05 10:15:00",
-    date: "05/08/2018",
-    time: "10:15",
-    category: "Health",
-    subcategory: "Eyewear",
-    item: "Prescription Glasses Payment Remaining",
-    mode: "Credit Card",
-    amount: 4300.00,
-    currency: "INR",
-    type: "Expense",
-    location: "Optical Studio",
-    mood: "Focused",
-    icon: "Glasses",
-    note: "High quality anti-glare glasses for long screen hours.",
-    tags: ["Vision Care", "Eyewear", "Self Care"],
-    connectedIds: ["rec_201"],
-    chronotype: "Morning",
-    insights: "Essential health & productivity investment"
-  },
-
-  // THE FESTIVE & FAMILY ERA (AUGUST - SEPTEMBER 2018)
-  {
-    id: "rec_301",
-    timestamp: "2018-09-16 17:15:00",
-    date: "16/09/2018",
-    time: "17:15",
-    category: "Events",
-    subcategory: "Ganesh Pujan",
-    item: "Eco-Friendly Ganesh Idol & Puja Essentials",
-    mode: "Cash",
-    amount: 251.00,
-    currency: "INR",
-    type: "Expense",
-    location: "Local Artisan Stalls",
-    mood: "Devotional & Joyful",
-    icon: "Sparkles",
-    note: "Welcoming Bappa home for Ganesh Chaturthi festival!",
-    tags: ["Ganesh Chaturthi", "Festival", "Family Tradition"],
-    connectedIds: ["rec_302", "rec_303"],
-    chronotype: "Evening",
-    insights: "Cultural celebration peak in September"
-  },
-  {
-    id: "rec_302",
-    timestamp: "2018-08-24 13:34:00",
-    date: "24/08/2018",
-    time: "13:34",
-    category: "Events",
-    subcategory: "Navratri & Ganpati",
-    item: "Community Festival Contribution (Vargani)",
-    mode: "Cash",
-    amount: 1000.00,
-    currency: "INR",
-    type: "Expense",
-    location: "Community Center",
-    mood: "Generous",
-    icon: "Gift",
-    note: "Neighborhood festival committee vargani collection.",
-    tags: ["Community", "Navratri", "Festival Fund"],
-    connectedIds: ["rec_301"],
-    chronotype: "Afternoon",
-    insights: "High social cohesion & community participation"
-  },
-  {
-    id: "rec_303",
-    timestamp: "2018-08-30 21:10:00",
-    date: "30/08/2018",
-    time: "21:10",
-    category: "Purchases",
-    subcategory: "Sweets",
-    item: "Warna Shrikhand (Half KG)",
-    mode: "Cash",
-    amount: 78.00,
-    currency: "INR",
-    type: "Expense",
-    location: "Dairy Sweet Shop",
-    mood: "Delighted",
-    icon: "UtensilsCrossed",
-    note: "Festive dessert for family dinner.",
-    tags: ["Traditional Sweet", "Shrikhand", "Festive Food"],
-    connectedIds: ["rec_301", "rec_302"],
-    chronotype: "Night",
-    insights: "Seasonal sweet consumption aligns with Indian festive calendar"
-  },
-
-  // TECH, AUDIO & SELF DEVELOPMENT ERA (JUNE - JULY 2018)
-  {
-    id: "rec_401",
-    timestamp: "2018-07-16 10:43:00",
-    date: "16/07/2018",
-    time: "10:43",
-    category: "Purchases",
-    subcategory: "Hardware & Audio",
-    item: "Sony WI-C100 Wireless Earphones",
-    mode: "Credit Card",
-    amount: 1190.00,
-    currency: "INR",
-    type: "Expense",
-    location: "Electronics Store",
-    mood: "Excited",
-    icon: "Headphones",
-    note: "Upgraded to bluetooth earphones for workout runs & podcasts.",
-    tags: ["Tech", "Audio Upgrade", "Sony", "Fitness Gear"],
-    connectedIds: ["rec_402", "rec_403"],
-    chronotype: "Morning",
-    insights: "Pivot towards wireless tech & active workout lifestyle"
-  },
-  {
-    id: "rec_402",
-    timestamp: "2018-06-11 15:30:00",
-    date: "11/06/2018",
-    time: "15:30",
-    category: "Events",
-    subcategory: "Marathon & Fitness",
-    item: "Monsoon Half-Marathon Registration Fee",
-    mode: "Credit Card",
-    amount: 1407.00,
-    currency: "INR",
-    type: "Expense",
-    location: "Sports Portal",
-    mood: "Determined",
-    icon: "Trophy",
-    note: "Committed to running 21K in the upcoming city monsoon marathon!",
-    tags: ["Marathon", "Fitness Goal", "Self Improvement"],
-    connectedIds: ["rec_401"],
-    chronotype: "Afternoon",
-    insights: "Strong commitment to physical endurance & health metrics"
-  },
-  {
-    id: "rec_403",
-    timestamp: "2018-06-27 21:32:00",
-    date: "27/06/2018",
-    time: "21:32",
+    id: "rec_101",
+    timestamp: "2018-08-31 23:42:00",
+    date: "31/08/2018",
+    time: "23:42",
     category: "Movies & Entertainment",
-    subcategory: "Astronomy",
-    item: "Nehru Planetarium Entry & Stargazing Show",
-    mode: "Credit Card",
-    amount: 308.85,
+    subcategory: "Cinema",
+    item: "2 Movie Tickets - INOX Cinema",
+    mode: "Debit Card",
+    amount: 481.36,
     currency: "INR",
     type: "Expense",
-    location: "Planetarium Dome",
-    mood: "Awe-inspired",
-    icon: "Sparkle",
-    note: "Fascinating show on deep space cosmos and constellations.",
-    tags: ["Space", "Curiosity", "Planetarium"],
-    connectedIds: ["rec_401", "rec_404"],
-    chronotype: "Night",
-    insights: "Intellectual curiosity & interest in science & cosmos"
-  },
-  {
-    id: "rec_404",
-    timestamp: "2018-03-23 19:48:00",
-    date: "23/03/2018",
-    time: "19:48",
-    category: "Personal Notes",
-    subcategory: "Book Reading",
-    item: "Book Purchase: 'Finding Your Next Job'",
-    mode: "Cash",
-    amount: 100.00,
-    currency: "INR",
-    type: "Expense",
-    location: "Street Bookstore",
-    mood: "Ambitious & Reflective",
-    icon: "BookOpen",
-    note: "Reading during commute to level up career ambitions.",
-    tags: ["Career Growth", "Books", "Self Learning"],
-    connectedIds: ["rec_403"],
-    chronotype: "Evening",
-    insights: "Active career progression planning & skill enhancement"
+    location: "INOX Multiplex",
+    mood: "Nostalgic",
+    icon: "Film",
+    note: "Late night movie screening with a close friend after payday.",
+    tags: ["Late Night", "Cinema", "Social"],
+    connectedIds: ["rec_102", "rec_103", "rec_104"],
+    chronotype: "Night Owl",
+    insights: "Late Night Entertainment Spike after Monthly Salary Credit"
   },
 
-  // TRAVEL & ESCAPE (GOA & TRAIN JOURNEYS)
+  // 3. PURCHASES
+  {
+    id: "rec_102",
+    timestamp: "2018-08-31 22:01:00",
+    date: "31/08/2018",
+    time: "22:01",
+    category: "Purchases",
+    subcategory: "Dinner",
+    item: "Domino's Gourmet Pizza & Garlic Bread",
+    mode: "Credit Card",
+    amount: 510.85,
+    currency: "INR",
+    type: "Expense",
+    location: "Domino's Pizza Outlet",
+    mood: "Craving",
+    icon: "Utensils",
+    note: "Celebratory post-work Friday night dinner.",
+    tags: ["Late Night Cravings", "Pizza", "Treat"],
+    connectedIds: ["rec_101", "rec_103"],
+    chronotype: "Night Owl",
+    insights: "Food craving linked directly with payday income"
+  },
+
+  // 4. PLACES
   {
     id: "rec_501",
     timestamp: "2018-07-06 18:30:00",
@@ -368,51 +114,123 @@ export const LIFE_RECEIPTS = [
     chronotype: "Evening",
     insights: "Mid-year vacation reset away from city routines"
   },
+
+  // 5. PHOTOS
   {
-    id: "rec_502",
-    timestamp: "2018-07-06 20:00:00",
-    date: "06/07/2018",
-    time: "20:00",
-    category: "Purchases",
-    subcategory: "Dining",
-    item: "Seafood Dinner at Seaside Shack",
-    mode: "Cash",
-    amount: 760.00,
+    id: "rec_601",
+    timestamp: "2018-07-07 19:15:00",
+    date: "07/07/2018",
+    time: "19:15",
+    category: "Photos",
+    subcategory: "Sunset Memory",
+    item: "Sunset Photo Snapshot at Anjuna Beach",
+    mode: "Smartphone Camera",
+    amount: 0.00,
     currency: "INR",
-    type: "Expense",
-    location: "Beachside Shack Goa",
-    mood: "Content",
-    icon: "Utensils",
-    note: "Delicious local fried fish & soothing acoustic ocean sound.",
-    tags: ["Goa Food", "Seafood", "Vacation Dining"],
-    connectedIds: ["rec_501"],
-    chronotype: "Night",
-    insights: "Culinary exploration during travel retreats"
+    type: "Digital Moment",
+    location: "Anjuna Beach Goa",
+    mood: "Serene",
+    icon: "Sparkles",
+    note: "Golden hour sunset capture saved to gallery favorites.",
+    tags: ["Photography", "Sunset", "Goa Memories"],
+    connectedIds: ["rec_501", "rec_502"],
+    chronotype: "Evening",
+    insights: "Visual digital archive of calm emotional states"
   },
+
+  // 6. MESSAGES
   {
-    id: "rec_503",
-    timestamp: "2018-08-23 21:29:00",
-    date: "23/08/2018",
-    time: "21:29",
-    category: "Places",
-    subcategory: "Train Travel",
-    item: "Sevagram Express 3AC Train Ticket",
-    mode: "Credit Card",
-    amount: 1305.40,
+    id: "rec_701",
+    timestamp: "2018-08-15 22:30:00",
+    date: "15/08/2018",
+    time: "22:30",
+    category: "Messages",
+    subcategory: "Saved Note",
+    item: "Saved Text: 'Remember to call Mom tomorrow'",
+    mode: "WhatsApp / Chat",
+    amount: 0.00,
+    currency: "INR",
+    type: "Digital Moment",
+    location: "Personal Phone",
+    mood: "Thoughtful",
+    icon: "BookOpen",
+    note: "Starred message reminder sent to self.",
+    tags: ["Family", "Reminder", "Saved Chat"],
+    connectedIds: ["rec_201"],
+    chronotype: "Night",
+    insights: "Strong interpersonal care & family relationship priority"
+  },
+
+  // 7. SEARCHES
+  {
+    id: "rec_801",
+    timestamp: "2018-06-27 20:45:00",
+    date: "27/06/2018",
+    time: "20:45",
+    category: "Searches",
+    subcategory: "Web Search",
+    item: "Search Query: 'Nehru planetarium stargazing shows'",
+    mode: "Search Engine",
+    amount: 0.00,
+    currency: "INR",
+    type: "Digital Moment",
+    location: "Mobile Browser",
+    mood: "Curious",
+    icon: "Sparkle",
+    note: "Looking up space & astronomy show timings before booking tickets.",
+    tags: ["Search", "Astronomy", "Curiosity"],
+    connectedIds: ["rec_403"],
+    chronotype: "Evening",
+    insights: "Web search directly preceding venue ticket purchase"
+  },
+
+  // 8. EVENTS
+  {
+    id: "rec_301",
+    timestamp: "2018-09-16 17:15:00",
+    date: "16/09/2018",
+    time: "17:15",
+    category: "Events",
+    subcategory: "Ganesh Pujan",
+    item: "Eco-Friendly Ganesh Idol & Puja Essentials",
+    mode: "Cash",
+    amount: 251.00,
     currency: "INR",
     type: "Expense",
-    location: "IRCTC Train Booking",
-    mood: "Expectant",
-    icon: "Train",
-    note: "Overnight 3-AC train journey back to hometown.",
-    tags: ["Train Journey", "Hometown Visit", "Railways"],
-    connectedIds: ["rec_501"],
-    chronotype: "Night",
-    insights: "Frequent domestic railway commuting for family connections"
+    location: "Local Artisan Stalls",
+    mood: "Devotional & Joyful",
+    icon: "Sparkles",
+    note: "Welcoming Bappa home for Ganesh Chaturthi festival!",
+    tags: ["Ganesh Chaturthi", "Festival", "Family Tradition"],
+    connectedIds: ["rec_302", "rec_303"],
+    chronotype: "Evening",
+    insights: "Cultural celebration peak in September"
+  },
+
+  // 9. PERSONAL NOTES
+  {
+    id: "rec_404",
+    timestamp: "2018-03-23 19:48:00",
+    date: "23/03/2018",
+    time: "19:48",
+    category: "Personal Notes",
+    subcategory: "Book Reading",
+    item: "Personal Note: 'Read Finding Your Next Job chapter 3'",
+    mode: "Notes App",
+    amount: 100.00,
+    currency: "INR",
+    type: "Expense",
+    location: "Street Bookstore",
+    mood: "Ambitious & Reflective",
+    icon: "BookOpen",
+    note: "Reading during commute to level up career ambitions.",
+    tags: ["Career Growth", "Books", "Self Learning"],
+    connectedIds: ["rec_801"],
+    chronotype: "Evening",
+    insights: "Active career progression planning & skill enhancement"
   }
 ];
 
-// Dedicated Spotify Vault dataset parsed from your actual spotify_history.csv
 export const SPOTIFY_VAULT = [
   {
     id: "sp_01",
@@ -464,95 +282,9 @@ export const SPOTIFY_VAULT = [
     mood: "Late Night Rock",
     coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&auto=format&fit=crop&q=80",
     is2AM: true
-  },
-  {
-    id: "sp_04",
-    track: "Electric Feel",
-    artist: "MGMT",
-    album: "Oracular Spectacular",
-    timestamp: "2013-07-08 03:41:21",
-    time: "03:41 AM",
-    durationMs: 229589,
-    durationFormatted: "3:49",
-    platform: "Web Player",
-    reasonStart: "trackdone",
-    reasonEnd: "trackdone",
-    skipped: false,
-    mood: "Psychedelic Funk",
-    coverUrl: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&auto=format&fit=crop&q=80",
-    is2AM: true
-  },
-  {
-    id: "sp_05",
-    track: "White",
-    artist: "Frank Ocean",
-    album: "channel ORANGE",
-    timestamp: "2013-07-08 03:46:29",
-    time: "03:46 AM",
-    durationMs: 76303,
-    durationFormatted: "1:16",
-    platform: "Web Player",
-    reasonStart: "clickrow",
-    reasonEnd: "unknown",
-    skipped: false,
-    mood: "Soulful Introspection",
-    coverUrl: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=400&auto=format&fit=crop&q=80",
-    is2AM: true
-  },
-  {
-    id: "sp_06",
-    track: "Gravity - Radio Edit",
-    artist: "John Mayer",
-    album: "Continuum",
-    timestamp: "2013-07-08 04:03:17",
-    time: "04:03 AM",
-    durationMs: 238837,
-    durationFormatted: "3:58",
-    platform: "Web Player",
-    reasonStart: "trackdone",
-    reasonEnd: "trackdone",
-    skipped: false,
-    mood: "Blues & Soul",
-    coverUrl: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400&auto=format&fit=crop&q=80",
-    is2AM: true
-  },
-  {
-    id: "sp_07",
-    track: "Young And Beautiful",
-    artist: "Lana Del Rey",
-    album: "The Great Gatsby OST",
-    timestamp: "2013-07-08 04:55:09",
-    time: "04:55 AM",
-    durationMs: 236042,
-    durationFormatted: "3:56",
-    platform: "Web Player",
-    reasonStart: "clickrow",
-    reasonEnd: "trackdone",
-    skipped: false,
-    mood: "Cinematic Drama",
-    coverUrl: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&auto=format&fit=crop&q=80",
-    is2AM: true
-  },
-  {
-    id: "sp_08",
-    track: "Fix You",
-    artist: "Coldplay",
-    album: "X&Y",
-    timestamp: "2013-07-08 05:02:27",
-    time: "05:02 AM",
-    durationMs: 295000,
-    durationFormatted: "4:55",
-    platform: "Web Player",
-    reasonStart: "nextbtn",
-    reasonEnd: "nextbtn",
-    skipped: false,
-    mood: "Emotional Comfort",
-    coverUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&auto=format&fit=crop&q=80",
-    is2AM: false
   }
 ];
 
-// Story Chapters generated dynamically for interactive storytelling
 export const STORY_CHAPTERS = [
   {
     chapterId: 1,
@@ -561,70 +293,17 @@ export const STORY_CHAPTERS = [
     theme: "Night Owl Cravings & Payday Reset",
     coverImage: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80",
     summary: "When salary hit the bank on Friday morning, it triggered a classic urban lifecycle: late night pizza craving at Domino's, followed by midnight cinema tickets at INOX, culminating in a 2:15 AM M83 listening session with solitary reflections.",
-    receiptIds: ["rec_103", "rec_102", "rec_101", "rec_104", "rec_105"],
+    receiptIds: ["rec_102", "rec_101", "rec_104"],
     narrative: [
-      "09:27 AM - ₹70,255 Salary credited. Relief washes over after weeks of budgeting.",
       "10:01 PM - Domino's Pizza order placed. The weekend officially begins with hot melted cheese.",
       "11:42 PM - 2 Tickets booked at INOX for a late night movie screening.",
-      "02:15 AM - Headphones on. M83 'Midnight City' synth echoes in the quiet room.",
-      "Next Morning 10:00 AM - Financial discipline kicks back in: ₹12,500 transferred to PPF investment."
+      "02:15 AM - Headphones on. M83 'Midnight City' synth echoes in the quiet room."
     ],
     personaBadge: "The Midnight Dreamer",
     quote: "Disconnected receipts don't just show money spent — they reveal how we seek balance between work, craving, and quiet reflection."
-  },
-  {
-    chapterId: 2,
-    title: "Chapter II: Care, Compassion & Small Comforts",
-    subtitle: "July 20 - August 5, 2018",
-    theme: "Family Healthcare & Emotional Support",
-    coverImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80",
-    summary: "Mid-July brought unexpected responsibilities. Hospital consultations for a family cataract surgery created anxiety, but simple ₹20 chocobars on rainy afternoons brought moments of sweet respite.",
-    receiptIds: ["rec_201", "rec_202", "rec_203", "rec_204"],
-    narrative: [
-      "09:11 AM - ₹1,048 Eye clinic medicine purchased. Responsibility takes priority.",
-      "01:06 PM - Rain pouring outside. Taking an Ola cab back home with medicine supplies.",
-      "07:59 PM - Stopping by the corner kirana shop for a simple ₹20 Chocobar comfort treat.",
-      "Aug 5 - Investing ₹4,300 in new anti-glare prescription glasses for long productivity hours."
-    ],
-    personaBadge: "The Devoted Caregiver",
-    quote: "Even in stressful health phases, small sweet rituals restore warmth to the day."
-  },
-  {
-    chapterId: 3,
-    title: "Chapter III: Festivities, Sweets & Community Roots",
-    subtitle: "August 24 - September 16, 2018",
-    theme: "Ganesh Chaturthi & Cultural Belonging",
-    coverImage: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800&auto=format&fit=crop&q=80",
-    summary: "As autumn approached, spiritual and festive warmth filled the household. Community festival donations, eco-friendly clay Ganpati idols, and rich Shrikhand desserts defined this joyful chapter.",
-    receiptIds: ["rec_302", "rec_303", "rec_301"],
-    narrative: [
-      "Aug 24 - ₹1,000 contributed to local Navratri & Ganpati community festival fund.",
-      "Aug 30 - Bringing home half a kilo of Warna Shrikhand for family dinner.",
-      "Sept 16 - Welcoming Bappa home with an eco-friendly Ganesh Idol (₹251)."
-    ],
-    personaBadge: "The Festival Believer",
-    quote: "Festivals anchor our digital lives back into real, shared human warmth."
-  },
-  {
-    chapterId: 4,
-    title: "Chapter IV: Audio Upgrades, Astronomy & Ambition",
-    subtitle: "March 23 - July 16, 2018",
-    theme: "Self Development & Scientific Curiosity",
-    coverImage: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&auto=format&fit=crop&q=80",
-    summary: "A season of personal growth: upgrading to Sony wireless earphones for workout sessions, committing to a 21K monsoon marathon, and stargazing at the Planetarium.",
-    receiptIds: ["rec_404", "rec_402", "rec_403", "rec_401"],
-    narrative: [
-      "March 23 - Street purchase of 'Finding Your Next Job' book during evening commute.",
-      "June 11 - Registering for Monsoon 21K Half-Marathon (₹1,407).",
-      "June 27 - Late evening show at Nehru Planetarium exploring cosmic constellations.",
-      "July 16 - Purchasing Sony WI-C100 Wireless Earphones to power daily workout runs."
-    ],
-    personaBadge: "The Curiosity Seeker",
-    quote: "Growth is a quiet habit — built through books read on trains and miles run in the rain."
   }
 ];
 
-// Chronotype & Mood Analytics
 export const ANALYTICS_DATA = {
   chronotype: {
     nightOwl: 42,
